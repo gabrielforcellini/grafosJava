@@ -2,6 +2,7 @@ package grafos;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Vertice implements Comparable<Vertice>{
 	
@@ -34,15 +35,29 @@ public class Vertice implements Comparable<Vertice>{
 
 	@Override
 	public int compareTo(Vertice o) {
-		if (Integer.parseInt(this.nome) > Integer.parseInt(o.nome)) {
+		if (this.nome == (o.nome)) {
 			return 1;
-		} else if (Integer.parseInt(this.nome) < Integer.parseInt(o.nome)) {
-			return -1;
 		} else {			
 			return 0;
 		}
 	}
-	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(adj, nome);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Vertice other = (Vertice) obj;
+		return Objects.equals(adj, other.adj) && Objects.equals(nome, other.nome);
+	}
 	
 
 }
